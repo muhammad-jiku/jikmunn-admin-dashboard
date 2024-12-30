@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "D:\\_my_portfolio_\\Full Stack\\MERN\\5. Admin Dashboard\\jikmunn-admin-dashboard\\server\\logs\\winston\\successes\\.659a15526e0281c85cfed80269077d7069e4ebb8-audit.json",
+    "files": [
+        {
+            "date": 1735545457634,
+            "name": "D:\\_my_portfolio_\\Full Stack\\MERN\\5. Admin Dashboard\\jikmunn-admin-dashboard\\server\\logs\\winston\\successes\\jikmunn-admin-dashboard-2024-30-12-13-success.log",
+            "hash": "837f7f723265e3989ff23eaeaa26714f90fbb72abab85fdb37ff51dc79be484f"
+        }
+    ],
+    "hashType": "sha256"
+}
