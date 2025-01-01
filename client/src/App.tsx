@@ -2,6 +2,7 @@ import { CssBaseline, ThemeProvider } from '@mui/material';
 import { createTheme } from '@mui/material/styles';
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
+import { Routes } from 'react-router-dom';
 import { RootState } from './_store';
 import { themeSettings } from './_theme';
 import './App.css';
@@ -14,6 +15,7 @@ function App() {
     <div className='app'>
       <ThemeProvider theme={theme}>
         <CssBaseline />
+        <Routes></Routes>
         <h1>Vite + React</h1>
       </ThemeProvider>
     </div>
