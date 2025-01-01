@@ -1,7 +1,7 @@
-// color design tokens export
-type TokenGroup = {
-  [key: number | string]: string;
-};
+import { ThemeOptions } from '@mui/material/styles';
+
+// Define the structure for color tokens
+type TokenGroup = Record<string, string>;
 
 type Tokens = {
   grey: TokenGroup;
@@ -9,6 +9,35 @@ type Tokens = {
   secondary: TokenGroup;
 };
 
+// Extend MUI's theme to include custom properties
+declare module '@mui/material/styles' {
+  interface TypeBackground {
+    alt: string;
+  }
+  interface PaletteColor {
+    [key: number]: string; // Allow numeric keys like 100, 200, etc.
+  }
+  interface Palette {
+    neutral: PaletteColor; // Ensure "neutral" is typed correctly
+  }
+  interface PaletteOptions {
+    neutral?: PaletteColor; // Ensure "neutral" is optional in PaletteOptions
+  }
+}
+
+// declare module '@mui/material/styles' {
+//   interface PaletteColor {
+//     [key: number]: string; // Allow numeric keys like 100, 200, etc.
+//   }
+//   interface Palette {
+//     neutral: PaletteColor; // Ensure "neutral" is typed correctly
+//   }
+//   interface PaletteOptions {
+//     neutral?: PaletteColor; // Ensure "neutral" is optional in PaletteOptions
+//   }
+// }
+
+// Define dark mode tokens
 export const tokensDark: Tokens = {
   grey: {
     0: '#ffffff',
@@ -37,7 +66,10 @@ export const tokensDark: Tokens = {
     900: '#070812',
   },
   secondary: {
-    50: '#f0f0f0',
+    // 50: '#f0f0f0',
+    50: '#ffffff',
+    // 100: '#f4f4f4',
+    // 200: '#e9e9e9',
     100: '#fff6e0',
     200: '#ffedc2',
     300: '#ffe3a3',
@@ -50,170 +82,58 @@ export const tokensDark: Tokens = {
   },
 };
 
+// Utility function to reverse tokens
 function reverseTokens(tokens: Tokens): Tokens {
-  const reversedTokens: Tokens = {} as Tokens; // Initialize with Tokens type
-  Object.entries(tokens).forEach(([key, val]) => {
-    const keys = Object.keys(val);
-    const values = Object.values(val);
-    const reversedObj: TokenGroup = {};
-    keys.forEach((_, i) => {
-      reversedObj[keys[i]] = values[keys.length - i - 1];
-    });
-    reversedTokens[key as keyof Tokens] = reversedObj;
-  });
-  return reversedTokens;
+  return Object.fromEntries(
+    Object.entries(tokens).map(([key, val]) => [
+      key,
+      Object.fromEntries(Object.entries(val).reverse()),
+    ])
+  ) as Tokens;
 }
 
+// Generate light mode tokens by reversing the dark mode tokens
 export const tokensLight = reverseTokens(tokensDark);
 
-// mui theme settings
-// export const themeSettings = (mode) => {
-//   return {
-//     palette: {
-//       mode: mode,
-//       ...(mode === 'dark'
-//         ? {
-//             primary: {
-//               ...tokensDark.primary,
-//               main: tokensDark.primary[400],
-//               light: tokensDark.primary[400],
-//             },
-//             secondary: {
-//               ...tokensDark.secondary,
-//               main: tokensDark.secondary[300],
-//             },
-//             neutral: {
-//               ...tokensDark.grey,
-//               main: tokensDark.grey[500],
-//             },
-//             background: {
-//               default: tokensDark.primary[600],
-//               alt: tokensDark.primary[500],
-//             },
-//           }
-//         : {
-//             primary: {
-//               ...tokensLight.primary,
-//               main: tokensLight.primary[400],
-//               light: tokensLight.primary[400],
-//             },
-//             secondary: {
-//               ...tokensLight.secondary,
-//               main: tokensLight.secondary[300],
-//             },
-//             neutral: {
-//               ...tokensLight.grey,
-//               main: tokensLight.grey[500],
-//             },
-//             background: {
-//               default: tokensLight.primary[100],
-//               alt: tokensLight.primary[50],
-//             },
-//           }),
-//     },
-//     typography: {
-//       fontFamily: ['Inter', 'sans-serif'].join(','),
-//       fontSize: 12,
-//       h1: {
-//         fontFamily: ['Inter', 'sans-serif'].join(','),
-//         fontSize: 40,
-//       },
-//       h2: {
-//         fontFamily: ['Inter', 'sans-serif'].join(','),
-//         fontSize: 32,
-//       },
-//       h3: {
-//         fontFamily: ['Inter', 'sans-serif'].join(','),
-//         fontSize: 24,
-//       },
-//       h4: {
-//         fontFamily: ['Inter', 'sans-serif'].join(','),
-//         fontSize: 20,
-//       },
-//       h5: {
-//         fontFamily: ['Inter', 'sans-serif'].join(','),
-//         fontSize: 16,
-//       },
-//       h6: {
-//         fontFamily: ['Inter', 'sans-serif'].join(','),
-//         fontSize: 14,
-//       },
-//     },
-//   };
-// };
+// MUI theme settings
+type Mode = 'light' | 'dark';
+export const themeSettings = (mode: Mode): ThemeOptions => {
+  const isDarkMode = mode === 'dark';
+  const tokens = isDarkMode ? tokensDark : tokensLight;
 
-// _theme/index.ts
-export const themeSettings = (mode: 'light' | 'dark') => {
   return {
     palette: {
-      mode: mode,
-      ...(mode === 'dark'
-        ? {
-            primary: {
-              ...tokensDark.primary,
-              main: tokensDark.primary[400],
-              light: tokensDark.primary[400],
-            },
-            secondary: {
-              ...tokensDark.secondary,
-              main: tokensDark.secondary[300],
-            },
-            neutral: {
-              ...tokensDark.grey,
-              main: tokensDark.grey[500],
-            },
-            background: {
-              default: tokensDark.primary[600],
-              alt: tokensDark.primary[500],
-            },
-          }
-        : {
-            primary: {
-              ...tokensLight.primary,
-              main: tokensLight.primary[400],
-              light: tokensLight.primary[400],
-            },
-            secondary: {
-              ...tokensLight.secondary,
-              main: tokensLight.secondary[300],
-            },
-            neutral: {
-              ...tokensLight.grey,
-              main: tokensLight.grey[500],
-            },
-            background: {
-              default: tokensLight.primary[100],
-              alt: tokensLight.primary[50],
-            },
-          }),
+      mode,
+      primary: {
+        ...tokens.primary,
+        main: tokens.primary[400],
+        light: tokens.primary[400],
+      },
+      secondary: {
+        ...tokens.secondary,
+        main: tokens.secondary[300],
+      },
+      neutral: {
+        ...tokens.grey,
+        main: tokens.grey[500],
+        light: '',
+        dark: '',
+        contrastText: '',
+      },
+      background: {
+        default: tokens.primary[isDarkMode ? 600 : 50],
+        alt: tokens.primary[isDarkMode ? 500 : 100],
+      },
     },
     typography: {
       fontFamily: ['Inter', 'sans-serif'].join(','),
       fontSize: 12,
-      h1: {
-        fontFamily: ['Inter', 'sans-serif'].join(','),
-        fontSize: 40,
-      },
-      h2: {
-        fontFamily: ['Inter', 'sans-serif'].join(','),
-        fontSize: 32,
-      },
-      h3: {
-        fontFamily: ['Inter', 'sans-serif'].join(','),
-        fontSize: 24,
-      },
-      h4: {
-        fontFamily: ['Inter', 'sans-serif'].join(','),
-        fontSize: 20,
-      },
-      h5: {
-        fontFamily: ['Inter', 'sans-serif'].join(','),
-        fontSize: 16,
-      },
-      h6: {
-        fontFamily: ['Inter', 'sans-serif'].join(','),
-        fontSize: 14,
-      },
+      h1: { fontFamily: 'Inter, sans-serif', fontSize: 40 },
+      h2: { fontFamily: 'Inter, sans-serif', fontSize: 32 },
+      h3: { fontFamily: 'Inter, sans-serif', fontSize: 24 },
+      h4: { fontFamily: 'Inter, sans-serif', fontSize: 20 },
+      h5: { fontFamily: 'Inter, sans-serif', fontSize: 16 },
+      h6: { fontFamily: 'Inter, sans-serif', fontSize: 14 },
     },
   };
 };

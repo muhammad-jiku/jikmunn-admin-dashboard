@@ -13,7 +13,6 @@ export const globalSlice = createSlice({
   initialState,
   reducers: {
     setMode(state, action: PayloadAction<'light' | 'dark'>) {
-      // Ensure payload is restricted to these values
       state.mode = action.payload;
     },
   },
