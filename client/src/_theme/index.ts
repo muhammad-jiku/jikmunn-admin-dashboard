@@ -67,7 +67,83 @@ function reverseTokens(tokens: Tokens): Tokens {
 export const tokensLight = reverseTokens(tokensDark);
 
 // mui theme settings
-export const themeSettings = (mode: string) => {
+// export const themeSettings = (mode) => {
+//   return {
+//     palette: {
+//       mode: mode,
+//       ...(mode === 'dark'
+//         ? {
+//             primary: {
+//               ...tokensDark.primary,
+//               main: tokensDark.primary[400],
+//               light: tokensDark.primary[400],
+//             },
+//             secondary: {
+//               ...tokensDark.secondary,
+//               main: tokensDark.secondary[300],
+//             },
+//             neutral: {
+//               ...tokensDark.grey,
+//               main: tokensDark.grey[500],
+//             },
+//             background: {
+//               default: tokensDark.primary[600],
+//               alt: tokensDark.primary[500],
+//             },
+//           }
+//         : {
+//             primary: {
+//               ...tokensLight.primary,
+//               main: tokensLight.primary[400],
+//               light: tokensLight.primary[400],
+//             },
+//             secondary: {
+//               ...tokensLight.secondary,
+//               main: tokensLight.secondary[300],
+//             },
+//             neutral: {
+//               ...tokensLight.grey,
+//               main: tokensLight.grey[500],
+//             },
+//             background: {
+//               default: tokensLight.primary[100],
+//               alt: tokensLight.primary[50],
+//             },
+//           }),
+//     },
+//     typography: {
+//       fontFamily: ['Inter', 'sans-serif'].join(','),
+//       fontSize: 12,
+//       h1: {
+//         fontFamily: ['Inter', 'sans-serif'].join(','),
+//         fontSize: 40,
+//       },
+//       h2: {
+//         fontFamily: ['Inter', 'sans-serif'].join(','),
+//         fontSize: 32,
+//       },
+//       h3: {
+//         fontFamily: ['Inter', 'sans-serif'].join(','),
+//         fontSize: 24,
+//       },
+//       h4: {
+//         fontFamily: ['Inter', 'sans-serif'].join(','),
+//         fontSize: 20,
+//       },
+//       h5: {
+//         fontFamily: ['Inter', 'sans-serif'].join(','),
+//         fontSize: 16,
+//       },
+//       h6: {
+//         fontFamily: ['Inter', 'sans-serif'].join(','),
+//         fontSize: 14,
+//       },
+//     },
+//   };
+// };
+
+// _theme/index.ts
+export const themeSettings = (mode: 'light' | 'dark') => {
   return {
     palette: {
       mode: mode,
