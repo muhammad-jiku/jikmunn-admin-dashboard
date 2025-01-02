@@ -5,6 +5,7 @@ import helmet from 'helmet';
 import httpStatus from 'http-status';
 import morgan from 'morgan';
 import { globalErrorHandler } from './app/middlewares/globalErrorHandler';
+import routes from './app/routes';
 
 // app init
 const app: Application = express();
@@ -32,6 +33,7 @@ app.use(
 );
 
 // api initialization
+app.use('/api/v1', routes);
 
 // global error handler
 app.use(globalErrorHandler);
