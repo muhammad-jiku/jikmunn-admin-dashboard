@@ -25,18 +25,6 @@ declare module '@mui/material/styles' {
   }
 }
 
-// declare module '@mui/material/styles' {
-//   interface PaletteColor {
-//     [key: number]: string; // Allow numeric keys like 100, 200, etc.
-//   }
-//   interface Palette {
-//     neutral: PaletteColor; // Ensure "neutral" is typed correctly
-//   }
-//   interface PaletteOptions {
-//     neutral?: PaletteColor; // Ensure "neutral" is optional in PaletteOptions
-//   }
-// }
-
 // Define dark mode tokens
 export const tokensDark: Tokens = {
   grey: {
@@ -66,10 +54,7 @@ export const tokensDark: Tokens = {
     900: '#070812',
   },
   secondary: {
-    // 50: '#f0f0f0',
     50: '#ffffff',
-    // 100: '#f4f4f4',
-    // 200: '#e9e9e9',
     100: '#fff6e0',
     200: '#ffedc2',
     300: '#ffe3a3',
@@ -97,48 +82,6 @@ export const tokensLight = reverseTokens(tokensDark);
 
 // MUI theme settings
 type Mode = 'light' | 'dark';
-// export const themeSettings = (mode: Mode): ThemeOptions => {
-//   const isDarkMode = mode === 'dark';
-//   const tokens = isDarkMode ? tokensDark : tokensLight;
-
-//   return {
-//     palette: {
-//       mode,
-//       primary: {
-//         ...tokens.primary,
-//         main: tokens.primary[400],
-//         light: tokens.primary[400],
-//       },
-//       secondary: {
-//         ...tokens.secondary,
-//         main: tokens.secondary[300],
-//       },
-//       neutral: {
-//         ...tokens.grey,
-//         main: tokens.grey[500],
-//         light: '',
-//         dark: '',
-//         contrastText: '',
-//       },
-//       background: {
-//         default: tokens.primary[isDarkMode ? 600 : 50],
-//         alt: tokens.primary[isDarkMode ? 500 : 100],
-//         // default: tokens.primary[600],
-//         // alt: tokens.primary[500],
-//       },
-//     },
-//     typography: {
-//       fontFamily: ['Inter', 'sans-serif'].join(','),
-//       fontSize: 12,
-//       h1: { fontFamily: 'Inter, sans-serif', fontSize: 40 },
-//       h2: { fontFamily: 'Inter, sans-serif', fontSize: 32 },
-//       h3: { fontFamily: 'Inter, sans-serif', fontSize: 24 },
-//       h4: { fontFamily: 'Inter, sans-serif', fontSize: 20 },
-//       h5: { fontFamily: 'Inter, sans-serif', fontSize: 16 },
-//       h6: { fontFamily: 'Inter, sans-serif', fontSize: 14 },
-//     },
-//   };
-// };
 export const themeSettings = (mode: Mode): ThemeOptions => {
   const isDarkMode = mode === 'dark';
   const tokens = isDarkMode ? tokensDark : tokensLight;
