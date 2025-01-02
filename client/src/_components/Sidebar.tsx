@@ -29,9 +29,11 @@ import {
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import profileImage from '../_assets/profile.jpg';
+import { IUser } from '../_interfaces';
 import { FlexBetween } from './FlexBetween';
 
 type SidebarProps = {
+  data: IUser;
   drawerWidth: string;
   isSidebarOpen: boolean;
   setIsSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -39,6 +41,7 @@ type SidebarProps = {
 };
 
 function Sidebar({
+  data,
   drawerWidth,
   isSidebarOpen,
   setIsSidebarOpen,
@@ -183,13 +186,13 @@ function Sidebar({
                   fontSize='0.9rem'
                   sx={{ color: theme.palette.secondary[100] }}
                 >
-                  Profile {/* {user.name} */}
+                  {data ? data?.name : 'Profile'}
                 </Typography>
                 <Typography
                   fontSize='0.8rem'
                   sx={{ color: theme.palette.secondary[200] }}
                 >
-                  Businessman {/* {user.occupation} */}
+                  {data ? data?.occupation : 'Businessman'}
                 </Typography>
               </Box>
               <SettingsOutlined

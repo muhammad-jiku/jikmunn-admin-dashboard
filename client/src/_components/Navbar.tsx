@@ -21,15 +21,17 @@ import {
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import profileImage from '../_assets/profile.jpg';
+import { IUser } from '../_interfaces';
 import { setMode } from '../_store/reducers';
 import { FlexBetween } from './FlexBetween';
 
 type SidebarProps = {
+  data: IUser;
   isSidebarOpen: boolean;
   setIsSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-function Navbar({ isSidebarOpen, setIsSidebarOpen }: SidebarProps) {
+function Navbar({ data, isSidebarOpen, setIsSidebarOpen }: SidebarProps) {
   const dispatch = useDispatch();
   const theme = useTheme();
 
@@ -112,13 +114,13 @@ function Navbar({ isSidebarOpen, setIsSidebarOpen }: SidebarProps) {
                 sx={{ color: theme.palette.secondary[100] }}
               >
                 <Typography fontWeight='bold' fontSize='0.85rem'>
-                  Profile
+                  {data ? data?.name : 'Profile'}
                 </Typography>
                 <Typography
                   fontSize='0.75rem'
                   sx={{ color: theme.palette.secondary[200] }}
                 >
-                  Businessman
+                  {data ? data?.occupation : 'Businessman'}
                 </Typography>
               </Box>
 

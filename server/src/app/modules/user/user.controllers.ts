@@ -8,9 +8,9 @@ import { UserServices } from './user.services';
 const getUser = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const { id } = req.params;
+      const { userId } = req.params;
 
-      const result = await UserServices.getUser(id);
+      const result = await UserServices.getUser(userId);
 
       sendResponse<IUser>(res, {
         statusCode: httpStatus.OK,
@@ -26,4 +26,5 @@ const getUser = catchAsync(
 
 export const UserControllers = {
   getUser,
+
 };
