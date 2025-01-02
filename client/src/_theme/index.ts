@@ -97,6 +97,48 @@ export const tokensLight = reverseTokens(tokensDark);
 
 // MUI theme settings
 type Mode = 'light' | 'dark';
+// export const themeSettings = (mode: Mode): ThemeOptions => {
+//   const isDarkMode = mode === 'dark';
+//   const tokens = isDarkMode ? tokensDark : tokensLight;
+
+//   return {
+//     palette: {
+//       mode,
+//       primary: {
+//         ...tokens.primary,
+//         main: tokens.primary[400],
+//         light: tokens.primary[400],
+//       },
+//       secondary: {
+//         ...tokens.secondary,
+//         main: tokens.secondary[300],
+//       },
+//       neutral: {
+//         ...tokens.grey,
+//         main: tokens.grey[500],
+//         light: '',
+//         dark: '',
+//         contrastText: '',
+//       },
+//       background: {
+//         default: tokens.primary[isDarkMode ? 600 : 50],
+//         alt: tokens.primary[isDarkMode ? 500 : 100],
+//         // default: tokens.primary[600],
+//         // alt: tokens.primary[500],
+//       },
+//     },
+//     typography: {
+//       fontFamily: ['Inter', 'sans-serif'].join(','),
+//       fontSize: 12,
+//       h1: { fontFamily: 'Inter, sans-serif', fontSize: 40 },
+//       h2: { fontFamily: 'Inter, sans-serif', fontSize: 32 },
+//       h3: { fontFamily: 'Inter, sans-serif', fontSize: 24 },
+//       h4: { fontFamily: 'Inter, sans-serif', fontSize: 20 },
+//       h5: { fontFamily: 'Inter, sans-serif', fontSize: 16 },
+//       h6: { fontFamily: 'Inter, sans-serif', fontSize: 14 },
+//     },
+//   };
+// };
 export const themeSettings = (mode: Mode): ThemeOptions => {
   const isDarkMode = mode === 'dark';
   const tokens = isDarkMode ? tokensDark : tokensLight;
@@ -106,24 +148,31 @@ export const themeSettings = (mode: Mode): ThemeOptions => {
       mode,
       primary: {
         ...tokens.primary,
-        main: tokens.primary[400],
-        light: tokens.primary[400],
+        main: tokens.primary[isDarkMode ? 500 : 400], // Balanced primary
+        light: tokens.primary[isDarkMode ? 400 : 300], // Softer accent
+        dark: tokens.primary[isDarkMode ? 600 : 500], // Richer depth
       },
       secondary: {
         ...tokens.secondary,
-        main: tokens.secondary[300],
+        main: tokens.secondary[isDarkMode ? 400 : 500], // Vibrant secondary
+        light: tokens.secondary[isDarkMode ? 300 : 400], // Subtle secondary
+        dark: tokens.secondary[isDarkMode ? 500 : 600], // Depth secondary
       },
       neutral: {
         ...tokens.grey,
-        main: tokens.grey[500],
-        light: '',
-        dark: '',
-        contrastText: '',
+        main: tokens.grey[isDarkMode ? 400 : 500], // Neutral tone
+        light: tokens.grey[isDarkMode ? 300 : 400], // Softer tone
+        dark: tokens.grey[isDarkMode ? 500 : 600], // Depth for contrast
+        contrastText: tokens.grey[isDarkMode ? 50 : 900], // Text visibility
       },
       background: {
-        default: tokens.primary[isDarkMode ? 600 : 50],
-        alt: tokens.primary[isDarkMode ? 500 : 100],
+        default: tokens.primary[isDarkMode ? 700 : 50], // Subtle background
+        alt: tokens.primary[isDarkMode ? 800 : 100], // Alternate background
       },
+      // action: {
+      //   hover: tokens.secondary[isDarkMode ? 200 : 300], // Interactive hover
+      //   active: tokens.primary[isDarkMode ? 500 : 400], // Active state
+      // },
     },
     typography: {
       fontFamily: ['Inter', 'sans-serif'].join(','),

@@ -24,7 +24,12 @@ import profileImage from '../_assets/profile.jpg';
 import { setMode } from '../_store/reducers';
 import { FlexBetween } from './FlexBetween';
 
-function Navbar() {
+type SidebarProps = {
+  isSidebarOpen: boolean;
+  setIsSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+function Navbar({ isSidebarOpen, setIsSidebarOpen }: SidebarProps) {
   const dispatch = useDispatch();
   const theme = useTheme();
 
@@ -45,7 +50,7 @@ function Navbar() {
       <Toolbar sx={{ justifyContent: 'space-between' }}>
         {/* LEFT SIDE */}
         <FlexBetween>
-          <IconButton>
+          <IconButton onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
             <MenuIcon />
           </IconButton>
           <FlexBetween
