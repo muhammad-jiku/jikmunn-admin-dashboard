@@ -6,7 +6,7 @@ import { User } from './user.model';
 const getUser = async (id: string): Promise<IUser | null> => {
   const result = await User.findOne();
   console.log('id', id);
-  console.log('result', result);
+  // console.log('result', result);
   if (!result) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Sorry, no user found!');
   }

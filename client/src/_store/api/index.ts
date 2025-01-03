@@ -3,7 +3,7 @@ import { IUser } from '../../_interfaces';
 
 const baseURI = import.meta.env.VITE_BASE_URI;
 
-console.log(baseURI);
+// console.log(baseURI);
 
 export const apiSlice = createApi({
   reducerPath: 'api',
