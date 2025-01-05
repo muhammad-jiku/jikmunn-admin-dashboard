@@ -1,16 +1,23 @@
-import httpStatus from 'http-status';
-import ApiError from '../../../errors/ApiError';
+import { ProductStat } from '../productStat/productStat.model';
 import { IProduct } from './product.interfaces';
 import { Product } from './product.model';
 
 const getProducts = async (): Promise<IProduct[] | null> => {
-  const productsResult = await Product.find();
+  const productsResult = await Product.find().lean(); // Returns plain JavaScript objects
 
-  if (!productsResult) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Sorry, nothing found!');
-  }
+  const productsWithStats = await Promise.all(
+    productsResult.map(async (product) => {
+      const stat = await ProductStat.find({
+        productId: product._id,
+      }).lean();
+      return {
+        ...product,
+        stat,
+      };
+    })
+  );
 
-  return productsResult;
+  return productsWithStats;
 };
 
 export const ProductServices = {
