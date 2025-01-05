@@ -24,7 +24,24 @@ const getUser = catchAsync(
   }
 );
 
+const getCustomers = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const result = await UserServices.getCustomers();
+
+      sendResponse<IUser[]>(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: 'Customers data retrieved successfully!',
+        data: result,
+      });
+    } catch (error) {
+      return next(error);
+    }
+  }
+);
+
 export const UserControllers = {
   getUser,
-
+  getCustomers,
 };
