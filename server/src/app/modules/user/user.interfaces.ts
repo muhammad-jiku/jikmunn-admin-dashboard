@@ -44,3 +44,8 @@ export interface IGeography {
   id: string; // ISO3 code of the country
   value: number; // Number of users from this country
 }
+
+export interface IUserPerformance {
+  user: IUser; // The user object with all its properties
+  sales: ITransaction[]; // Array of transaction objects associated with the user's affiliate sales
+}

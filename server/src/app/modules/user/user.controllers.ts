@@ -2,7 +2,12 @@ import { NextFunction, Request, Response } from 'express';
 import httpStatus from 'http-status';
 import { catchAsync } from '../../../shared/catchAsync';
 import { sendResponse } from '../../../shared/sendResponse';
-import { IDashboardStats, IGeography, IUser } from './user.interfaces';
+import {
+  IDashboardStats,
+  IGeography,
+  IUser,
+  IUserPerformance,
+} from './user.interfaces';
 import { UserServices } from './user.services';
 
 const getUser = catchAsync(
@@ -24,6 +29,25 @@ const getUser = catchAsync(
   }
 );
 
+const getUserPerformance = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { userId } = req.params;
+
+      const result = await UserServices.getUserPerformance(userId);
+
+      sendResponse<IUserPerformance>(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: 'User performance data retrieved successfully!',
+        data: result,
+      });
+    } catch (error) {
+      return next(error);
+    }
+  }
+);
+
 const getCustomers = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -33,6 +57,23 @@ const getCustomers = catchAsync(
         statusCode: httpStatus.OK,
         success: true,
         message: 'Customers data retrieved successfully!',
+        data: result,
+      });
+    } catch (error) {
+      return next(error);
+    }
+  }
+);
+
+const getAdmins = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const result = await UserServices.getAdmins();
+
+      sendResponse<IUser[]>(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: 'Admins data retrieved successfully!',
         data: result,
       });
     } catch (error) {
@@ -77,7 +118,9 @@ const getGeography = catchAsync(
 
 export const UserControllers = {
   getUser,
+  getUserPerformance,
   getCustomers,
+  getAdmins,
   getDashboardStats,
   getGeography,
 };
