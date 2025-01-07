@@ -1,4 +1,5 @@
 import { Model } from 'mongoose';
+import { ITransaction } from '../transaction/transaction.interfaces';
 
 export interface IUser {
   name: string;
@@ -15,3 +16,26 @@ export interface IUser {
 
 // types of user model for statics methods
 export type IUserModel = Model<IUser, Record<string, unknown>>;
+
+export interface IDashboardStats {
+  totalCustomers: number;
+  yearlyTotalSoldUnits: number;
+  yearlySalesTotal: number;
+  monthlyData: Array<{
+    month: string;
+    totalSales: number;
+    totalUnits: number;
+  }>;
+  salesByCategory: Record<string, number>;
+  thisMonthStats?: {
+    month: string;
+    totalSales: number;
+    totalUnits: number;
+  };
+  todayStats?: {
+    date: string;
+    totalSales: number;
+    totalUnits: number;
+  };
+  transactions: ITransaction[];
+}
