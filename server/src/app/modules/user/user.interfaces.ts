@@ -39,3 +39,8 @@ export interface IDashboardStats {
   };
   transactions: ITransaction[];
 }
+
+export interface IGeography {
+  id: string; // ISO3 code of the country
+  value: number; // Number of users from this country
+}

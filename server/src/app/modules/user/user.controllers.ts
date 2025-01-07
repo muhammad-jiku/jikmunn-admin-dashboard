@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import httpStatus from 'http-status';
 import { catchAsync } from '../../../shared/catchAsync';
 import { sendResponse } from '../../../shared/sendResponse';
-import { IDashboardStats, IUser } from './user.interfaces';
+import { IDashboardStats, IGeography, IUser } from './user.interfaces';
 import { UserServices } from './user.services';
 
 const getUser = catchAsync(
@@ -58,8 +58,26 @@ const getDashboardStats = catchAsync(
   }
 );
 
+const getGeography = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const result = await UserServices.getGeography();
+
+      sendResponse<IGeography[]>(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: 'Users location data retrieved successfully!',
+        data: result,
+      });
+    } catch (error) {
+      return next(error);
+    }
+  }
+);
+
 export const UserControllers = {
   getUser,
   getCustomers,
   getDashboardStats,
+  getGeography,
 };

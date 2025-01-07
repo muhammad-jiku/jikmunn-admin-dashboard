@@ -1,8 +1,9 @@
+import getCountryIso3 from 'country-iso-2-to-3';
 import httpStatus from 'http-status';
 import ApiError from '../../../errors/ApiError';
 import { OverallStat } from '../overallStat/overallStat.model';
 import { Transaction } from '../transaction/transaction.model';
-import { IDashboardStats, IUser } from './user.interfaces';
+import { IDashboardStats, IGeography, IUser } from './user.interfaces';
 import { User } from './user.model';
 
 const getUser = async (id: string): Promise<IUser | null> => {
@@ -76,8 +77,33 @@ const getDashboardStats = async (): Promise<IDashboardStats | null> => {
   return result;
 };
 
+const getGeography = async (): Promise<IGeography[] | null> => {
+  const users = await User.find().lean(); // Returns plain JavaScript objects
+
+  // Map and reduce user locations
+  const mappedLocations = users.reduce<Record<string, number>>((acc, user) => {
+    const countryISO3 = getCountryIso3(user.country);
+    if (!acc[countryISO3]) {
+      acc[countryISO3] = 0;
+    }
+    acc[countryISO3]++;
+    return acc;
+  }, {});
+
+  // Format the mapped locations into the required structure
+  const formattedLocations = Object.entries(mappedLocations).map(
+    ([country, count]) => ({
+      id: country,
+      value: count,
+    })
+  );
+
+  return formattedLocations;
+};
+
 export const UserServices = {
   getUser,
   getCustomers,
   getDashboardStats,
+  getGeography,
 };
