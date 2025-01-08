@@ -8,16 +8,55 @@ const baseURI = import.meta.env.VITE_BASE_URI;
 export const apiSlice = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({ baseUrl: baseURI }),
-  tagTypes: ['user'], // Define tag types used for caching
+  tagTypes: [
+    'user',
+    'user_performance',
+    'dashboard',
+    'location',
+    'customers',
+    'admins',
+  ], // Define tag types used for caching
   endpoints: (builder) => ({
     // Get user
     getUser: builder.query<IUser, string>({
       query: (userId) => `/api/v1/users/${userId}`,
       providesTags: ['user'], // Cache invalidation tag
     }),
+    // Get user performance
+    getUserPerformance: builder.query<IUser, string>({
+      query: (userId) => `/api/v1/users/${userId}/performance`,
+      providesTags: ['user_performance'], // Cache invalidation tag
+    }),
+    // Get dashboard
+    getDashboard: builder.query<IUser, string>({
+      query: () => `/api/v1/users/dashboard`,
+      providesTags: ['dashboard'], // Cache invalidation tag
+    }),
+    // Get location
+    getUserLocations: builder.query<IUser, string>({
+      query: () => `/api/v1/users/location`,
+      providesTags: ['location'], // Cache invalidation tag
+    }),
+    // Get customers
+    getCustomers: builder.query<IUser, string>({
+      query: () => `/api/v1/users/customers`,
+      providesTags: ['customers'], // Cache invalidation tag
+    }),
+    // Get admins
+    getAdmins: builder.query<IUser, string>({
+      query: () => `/api/v1/users/admins`,
+      providesTags: ['admins'], // Cache invalidation tag
+    }),
   }),
 });
 
-export const { useGetUserQuery } = apiSlice;
+export const {
+  useGetUserQuery,
+  useGetUserPerformanceQuery,
+  useGetDashboardQuery,
+  useGetUserLocationsQuery,
+  useGetCustomersQuery,
+  useGetAdminsQuery,
+} = apiSlice;
 
 export default apiSlice;
