@@ -15,6 +15,8 @@ export const apiSlice = createApi({
     'location',
     'customers',
     'admins',
+    'sales',
+    'transactions',
   ], // Define tag types used for caching
   endpoints: (builder) => ({
     // Get user
@@ -47,6 +49,16 @@ export const apiSlice = createApi({
       query: () => `/api/v1/users/admins`,
       providesTags: ['admins'], // Cache invalidation tag
     }),
+    // Get sales
+    getSales: builder.query<IUser, string>({
+      query: () => `/api/v1/sales`,
+      providesTags: ['sales'], // Cache invalidation tag
+    }),
+    // Get transactions
+    getTransactions: builder.query<IUser, string>({
+      query: () => `/api/v1/transactions`,
+      providesTags: ['transactions'], // Cache invalidation tag
+    }),
   }),
 });
 
@@ -57,6 +69,8 @@ export const {
   useGetUserLocationsQuery,
   useGetCustomersQuery,
   useGetAdminsQuery,
+  useGetSalesQuery,
+  useGetTransactionsQuery,
 } = apiSlice;
 
 export default apiSlice;
