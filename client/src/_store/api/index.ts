@@ -17,6 +17,7 @@ export const apiSlice = createApi({
     'admins',
     'sales',
     'transactions',
+    'products',
   ], // Define tag types used for caching
   endpoints: (builder) => ({
     // Get user
@@ -59,6 +60,11 @@ export const apiSlice = createApi({
       query: () => `/api/v1/transactions`,
       providesTags: ['transactions'], // Cache invalidation tag
     }),
+    // Get products
+    getProducts: builder.query<IUser, string>({
+      query: () => `/api/v1/products`,
+      providesTags: ['products'], // Cache invalidation tag
+    }),
   }),
 });
 
@@ -71,6 +77,7 @@ export const {
   useGetAdminsQuery,
   useGetSalesQuery,
   useGetTransactionsQuery,
+  useGetProductsQuery,
 } = apiSlice;
 
 export default apiSlice;
