@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import {
+  IGeographyResponse,
   IProductResponse,
   ITransactionResponse,
   IUser,
@@ -39,7 +40,7 @@ export const apiSlice = createApi({
       providesTags: ['dashboard'], // Cache invalidation tag
     }),
     // Get location
-    getUserLocations: builder.query<IUser, string>({
+    getUserLocations: builder.query<IGeographyResponse, void>({
       query: () => `/api/v1/users/location`,
       providesTags: ['location'], // Cache invalidation tag
     }),
