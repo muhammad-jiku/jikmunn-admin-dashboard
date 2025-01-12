@@ -71,3 +71,24 @@ export interface IProductResponse {
   };
   data: IProduct[];
 }
+
+// transactions
+export interface ITransaction {
+  _id: string;
+  userId: string;
+  cost: string;
+  products: {
+    id: string; // replace ObjectId with string for simplicity
+    quantity: number; // equivalent to "of" in the server interface
+  }[];
+}
+
+export interface ITransactionResponse {
+  statusCode: number;
+  success: boolean;
+  message: string;
+  meta: {
+    total: number;
+  };
+  data: ITransaction[];
+}

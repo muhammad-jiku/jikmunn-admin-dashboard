@@ -1,5 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IProductResponse, IUser, IUserResponse } from '../../_interfaces';
+import {
+  IProductResponse,
+  ITransactionResponse,
+  IUser,
+  IUserResponse,
+} from '../../_interfaces';
 
 const baseURI = import.meta.env.VITE_BASE_URI;
 
@@ -54,8 +59,16 @@ export const apiSlice = createApi({
       providesTags: ['sales'], // Cache invalidation tag
     }),
     // Get transactions
-    getTransactions: builder.query<IUser, string>({
-      query: () => `/api/v1/transactions`,
+    // getTransactions: builder.query<ITransactionResponse, void>({
+    //   query: () => `/api/v1/transactions`,
+    //   providesTags: ['transactions'], // Cache invalidation tag
+    // }),
+    getTransactions: builder.query<
+      ITransactionResponse,
+      { page: number; pageSize: number; sort: string; search: string }
+    >({
+      query: ({ page, pageSize, sort, search }) =>
+        `/api/v1/transactions?page=${page}&pageSize=${pageSize}&sort=${sort}&search=${search}`,
       providesTags: ['transactions'], // Cache invalidation tag
     }),
     // Get products
