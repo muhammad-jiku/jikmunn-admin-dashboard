@@ -51,7 +51,7 @@ export const apiSlice = createApi({
       providesTags: ['customers'], // Cache invalidation tag
     }),
     // Get admins
-    getAdmins: builder.query<IUser, string>({
+    getAdmins: builder.query<IUserResponse, void>({
       query: () => `/api/v1/users/admins`,
       providesTags: ['admins'], // Cache invalidation tag
     }),
