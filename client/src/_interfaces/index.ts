@@ -143,6 +143,22 @@ export interface ISaleResponse {
   data: ISale[];
 }
 
+// user performances
+export interface IUserPerformance {
+  user: IUser; // The user object with all its properties
+  sales: ITransaction[]; // Array of transaction objects associated with the user's affiliate sales
+}
+
+export interface IUserPerformanceResponse {
+  statusCode: number;
+  success: boolean;
+  message: string;
+  meta: {
+    total: number;
+  };
+  data: IUserPerformance[];
+}
+
 // dashbaord
 export interface IDashboard {
   _id: string;

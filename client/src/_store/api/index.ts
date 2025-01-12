@@ -6,6 +6,7 @@ import {
   ISaleResponse,
   ITransactionResponse,
   IUser,
+  IUserPerformanceResponse,
   IUserResponse,
 } from '../../_interfaces';
 
@@ -32,7 +33,7 @@ export const apiSlice = createApi({
       providesTags: ['user'], // Cache invalidation tag
     }),
     // Get user performance
-    getUserPerformance: builder.query<IUser, string>({
+    getUserPerformance: builder.query<IUserPerformanceResponse, string>({
       query: (userId) => `/api/v1/users/${userId}/performance`,
       providesTags: ['user_performance'], // Cache invalidation tag
     }),
