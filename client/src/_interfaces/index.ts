@@ -116,11 +116,12 @@ export interface IGeographyResponse {
 //   totalUnits: number;
 // }
 
-// interface IDailyData {
-//   date: string;
-//   totalSales: number;
-//   totalUnits: number;
-// }
+export interface IDailyData {
+  date: string;
+  totalSales: number;
+  totalUnits: number;
+}
+
 export interface ISale {
   _id: string;
   totalCustomers: number;
