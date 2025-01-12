@@ -108,3 +108,36 @@ export interface IGeographyResponse {
   };
   data: IGeography[];
 }
+
+// sales
+// interface IMonthlyData {
+//   month: string;
+//   totalSales: number;
+//   totalUnits: number;
+// }
+
+// interface IDailyData {
+//   date: string;
+//   totalSales: number;
+//   totalUnits: number;
+// }
+export interface ISale {
+  _id: string;
+  totalCustomers: number;
+  yearlySalesTotal: number;
+  yearlyTotalSoldUnits: number;
+  year: number;
+  monthlyData: { month: string; totalSales: number; totalUnits: number }[];
+  dailyData: { date: string; totalSales: number; totalUnits: number }[];
+  salesByCategory: Record<string, number>; // Use `Record` instead of `Map`
+}
+
+export interface ISaleResponse {
+  statusCode: number;
+  success: boolean;
+  message: string;
+  meta: {
+    total: number;
+  };
+  data: ISale[];
+}

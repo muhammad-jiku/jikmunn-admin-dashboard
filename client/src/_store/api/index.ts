@@ -2,6 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import {
   IGeographyResponse,
   IProductResponse,
+  ISaleResponse,
   ITransactionResponse,
   IUser,
   IUserResponse,
@@ -55,7 +56,7 @@ export const apiSlice = createApi({
       providesTags: ['admins'], // Cache invalidation tag
     }),
     // Get sales
-    getSales: builder.query<IUser, string>({
+    getSales: builder.query<ISaleResponse, void>({
       query: () => `/api/v1/sales`,
       providesTags: ['sales'], // Cache invalidation tag
     }),
