@@ -142,3 +142,38 @@ export interface ISaleResponse {
   };
   data: ISale[];
 }
+
+// dashbaord
+export interface IDashboard {
+  _id: string;
+  totalCustomers: number;
+  yearlyTotalSoldUnits: number;
+  yearlySalesTotal: number;
+  monthlyData: Array<{
+    month: string;
+    totalSales: number;
+    totalUnits: number;
+  }>;
+  salesByCategory: Record<string, number>;
+  thisMonthStats?: {
+    month: string;
+    totalSales: number;
+    totalUnits: number;
+  };
+  todayStats?: {
+    date: string;
+    totalSales: number;
+    totalUnits: number;
+  };
+  transactions: ITransaction[];
+}
+
+export interface IDashboardResponse {
+  statusCode: number;
+  success: boolean;
+  message: string;
+  meta: {
+    total: number;
+  };
+  data: IDashboard[];
+}

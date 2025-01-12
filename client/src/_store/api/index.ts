@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import {
+  IDashboardResponse,
   IGeographyResponse,
   IProductResponse,
   ISaleResponse,
@@ -36,7 +37,7 @@ export const apiSlice = createApi({
       providesTags: ['user_performance'], // Cache invalidation tag
     }),
     // Get dashboard
-    getDashboard: builder.query<IUser, string>({
+    getDashboard: builder.query<IDashboardResponse, void>({
       query: () => `/api/v1/users/dashboard`,
       providesTags: ['dashboard'], // Cache invalidation tag
     }),

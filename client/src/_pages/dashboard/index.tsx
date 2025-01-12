@@ -1,4 +1,10 @@
-import { DownloadOutlined } from '@mui/icons-material';
+import {
+  DownloadOutlined,
+  Email,
+  PersonAdd,
+  PointOfSale,
+  Traffic,
+} from '@mui/icons-material';
 import {
   Box,
   Button,
@@ -6,43 +12,51 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material';
+import { DataGrid, GridRenderCellParams } from '@mui/x-data-grid';
+import OverviewChart from '../../_components/Charts/OverviewChart';
 import { FlexBetween } from '../../_components/FlexBetween';
 import Header from '../../_components/Header';
+import StatBox from '../../_components/StatBox';
+import { ITransaction } from '../../_interfaces';
+import { useGetDashboardQuery } from '../../_store/api';
 
 function Dashboard() {
   const theme = useTheme();
   const isNonMediumScreens = useMediaQuery('(min-width: 1200px)');
+  const { data, isLoading } = useGetDashboardQuery();
 
-  // const columns = [
-  //      {
-  //        field: '_id',
-  //        headerName: 'ID',
-  //        flex: 1,
-  //      },
-  //      {
-  //        field: 'userId',
-  //        headerName: 'User ID',
-  //        flex: 1,
-  //      },
-  //      {
-  //        field: 'createdAt',
-  //        headerName: 'CreatedAt',
-  //        flex: 1,
-  //      },
-  //      {
-  //        field: 'products',
-  //        headerName: '# of Products',
-  //        flex: 0.5,
-  //        sortable: false,
-  //        renderCell: (params) => params.value.length,
-  //      },
-  //      {
-  //        field: 'cost',
-  //        headerName: 'Cost',
-  //        flex: 1,
-  //        renderCell: (params) => `$${Number(params.value).toFixed(2)}`,
-  //      },
-  //    ];
+  const columns = [
+    {
+      field: '_id',
+      headerName: 'ID',
+      flex: 1,
+    },
+    {
+      field: 'userId',
+      headerName: 'User ID',
+      flex: 1,
+    },
+    {
+      field: 'createdAt',
+      headerName: 'CreatedAt',
+      flex: 1,
+    },
+    {
+      field: 'products',
+      headerName: '# of Products',
+      flex: 0.5,
+      sortable: false,
+      renderCell: (params: GridRenderCellParams<ITransaction>) =>
+        params.value.length,
+    },
+    {
+      field: 'cost',
+      headerName: 'Cost',
+      flex: 1,
+      renderCell: (params: GridRenderCellParams<ITransaction>) =>
+        `$${Number(params.value).toFixed(2)}`,
+    },
+  ];
 
   return (
     <Box m='1.5rem 2.5rem'>
@@ -78,59 +92,61 @@ function Dashboard() {
         }}
       >
         {/* ROW 1 */}
-        {/* <StatBox
-           title='Total Customers'
-           value={data && data.totalCustomers}
-           increase='+14%'
-           description='Since last month'
-           icon={
-             <Email
-               sx={{ color: theme.palette.secondary[300], fontSize: '26px' }}
-             />
-           }
-         />
-         <StatBox
-           title='Sales Today'
-           value={data && data.todayStats.totalSales}
-           increase='+21%'
-           description='Since last month'
-           icon={
-             <PointOfSale
-               sx={{ color: theme.palette.secondary[300], fontSize: '26px' }}
-             />
-           }
-         /> */}
-        {/*      <Box
-          gridColumn='span 8'
-          gridRow='span 2'
-          backgroundColor={theme.palette.background.alt}
-          p='1rem'
-          borderRadius='0.55rem'
+        <StatBox
+          title='Total Customers'
+          value={data && data?.data[0]?.totalCustomers}
+          increase='+14%'
+          description='Since last month'
+          icon={
+            <Email
+              sx={{ color: theme.palette.secondary[300], fontSize: '26px' }}
+            />
+          }
+        />
+        <StatBox
+          title='Sales Today'
+          value={data && data?.data[0]?.todayStats?.totalSales}
+          increase='+21%'
+          description='Since last month'
+          icon={
+            <PointOfSale
+              sx={{ color: theme.palette.secondary[300], fontSize: '26px' }}
+            />
+          }
+        />
+        <Box
+          sx={{
+            gridColumn: 'span 8',
+            gridRow: 'span 2',
+            backgroundColor: theme.palette.background.alt,
+            p: '1rem',
+            borderRadius: '0.55rem',
+          }}
         >
-          <OverviewChart view='sales' isDashboard={true} /> 
-        </Box>*/}
-        {/* <StatBox
-           title='Monthly Sales'
-           value={data && data.thisMonthStats.totalSales}
-           increase='+5%'
-           description='Since last month'
-           icon={
-             <PersonAdd
-               sx={{ color: theme.palette.secondary[300], fontSize: '26px' }}
-             />
-           }
-         />
-         <StatBox
-           title='Yearly Sales'
-           value={data && data.yearlySalesTotal}
-           increase='+43%'
-           description='Since last month'
-           icon={
-             <Traffic
-               sx={{ color: theme.palette.secondary[300], fontSize: '26px' }}
-             />
-           }
-         /> */}
+          <OverviewChart isDashboard={true} view='sales' />
+        </Box>
+        <StatBox
+          title='Monthly Sales'
+          value={data && data?.data[0]?.thisMonthStats?.totalSales}
+          increase='+5%'
+          description='Since last month'
+          icon={
+            <PersonAdd
+              sx={{ color: theme.palette.secondary[300], fontSize: '26px' }}
+            />
+          }
+        />
+        <StatBox
+          title='Yearly Sales'
+          value={data && data?.data[0]?.yearlySalesTotal}
+          increase='+43%'
+          description='Since last month'
+          icon={
+            <Traffic
+              sx={{ color: theme.palette.secondary[300], fontSize: '26px' }}
+            />
+          }
+        />
 
         {/* ROW 2 */}
         <Box
@@ -162,12 +178,12 @@ function Dashboard() {
             },
           }}
         >
-          {/* <DataGrid
-             loading={isLoading || !data}
-             getRowId={(row) => row._id}
-             rows={(data && data.transactions) || []}
-             columns={columns}
-           /> */}
+          <DataGrid
+            loading={isLoading || !data}
+            getRowId={(row) => row._id}
+            rows={(data && data?.data[0]?.transactions) || []}
+            columns={columns}
+          />
         </Box>
         <Box
           gridColumn='span 4'

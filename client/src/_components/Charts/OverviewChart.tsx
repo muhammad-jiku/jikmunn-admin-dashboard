@@ -5,11 +5,11 @@ import { ISale } from '../../_interfaces';
 import { useGetSalesQuery } from '../../_store/api';
 
 type OverviewChartProps = {
+  isDashboard? : boolean
   view: string;
 };
 
-function OverviewChart({ view }: OverviewChartProps) {
-  const isDashboard = false;
+function OverviewChart({ isDashboard = false, view }: OverviewChartProps) {
   const theme = useTheme();
   const { data: salesApiResponseData, isLoading } = useGetSalesQuery();
 
