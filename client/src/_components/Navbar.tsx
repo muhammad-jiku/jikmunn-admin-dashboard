@@ -25,13 +25,13 @@ import { IUser } from '../_interfaces';
 import { setMode } from '../_store/reducers';
 import { FlexBetween } from './FlexBetween';
 
-type SidebarProps = {
+type NavbarProps = {
   data: IUser;
   isSidebarOpen: boolean;
   setIsSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-function Navbar({ data, isSidebarOpen, setIsSidebarOpen }: SidebarProps) {
+function Navbar({ data, isSidebarOpen, setIsSidebarOpen }: NavbarProps) {
   const dispatch = useDispatch();
   const theme = useTheme();
 

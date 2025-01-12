@@ -27,3 +27,43 @@ export interface IUserResponse {
   };
   data: IUser[];
 }
+
+export interface IProduct {
+  _id: string;
+  name: string;
+  price: number;
+  description: string;
+  category: string;
+  rating: number;
+  supply: number;
+  stat: {
+    productId: string;
+    yearlySalesTotal: number;
+    yearlyTotalSoldUnits: number;
+    year: number;
+    monthlyData: [
+      {
+        month: string;
+        totalSales: number;
+        totalUnits: number;
+      }
+    ];
+    dailyData: [
+      {
+        date: string;
+        totalSales: number;
+        totalUnits: number;
+      }
+    ];
+  };
+}
+
+export interface IProductResponse {
+  statusCode: number;
+  success: boolean;
+  message: string;
+  meta: {
+    total: number;
+  };
+  data: IProduct[];
+}
