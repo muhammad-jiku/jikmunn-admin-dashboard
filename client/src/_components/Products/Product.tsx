@@ -4,6 +4,7 @@ import {
   CardActions,
   CardContent,
   Collapse,
+  Rating,
   Typography,
   useTheme,
 } from '@mui/material';
@@ -12,8 +13,6 @@ import { IProduct } from '../../_interfaces';
 
 type ProductProps = {
   data: IProduct;
-  //   isSidebarOpen: boolean;
-  //   setIsSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 function Product({ data }: ProductProps) {
@@ -42,7 +41,7 @@ function Product({ data }: ProductProps) {
         <Typography sx={{ mb: '1.5rem' }} color={theme.palette.secondary[400]}>
           ${Number(data?.price).toFixed(2)}
         </Typography>
-        {/* <Rating value={data?.rating} readOnly /> */}
+        <Rating value={data?.rating} readOnly />
 
         <Typography variant='body2'>{data?.description}</Typography>
       </CardContent>

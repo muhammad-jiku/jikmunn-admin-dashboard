@@ -4,6 +4,7 @@ export interface IGlobalState {
   };
 }
 
+// users
 export interface IUser {
   _id: string;
   name: string;
@@ -28,6 +29,9 @@ export interface IUserResponse {
   data: IUser[];
 }
 
+// customers
+
+// products
 export interface IProduct {
   _id: string;
   name: string;
