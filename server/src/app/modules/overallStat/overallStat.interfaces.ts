@@ -19,7 +19,8 @@ export interface IOverallStat {
   year: number;
   monthlyData: IMonthlyData[];
   dailyData: IDailyData[];
-  salesByCategory: Map<string, number>;
+  // salesByCategory: Map<string, number>;
+  salesByCategory: { [key: string]: number };
 }
 
 // Type definition for the OverallStat model to include static methods

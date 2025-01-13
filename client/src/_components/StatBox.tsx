@@ -16,7 +16,7 @@ function StatBox({ title, value, increase, icon, description }: StatBoxProps) {
   return (
     <Box
       sx={{
-        gridColumn: 'span 2',
+        gridColumn: 'span 3',
         gridRow: 'span 1',
         display: 'flex',
         flexDirection: 'column',

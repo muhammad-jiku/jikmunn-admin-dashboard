@@ -4,7 +4,7 @@ import Header from '../../_components/Header';
 import { userLocationsData } from '../../_helpers/locations';
 import { useGetUserLocationsQuery } from '../../_store/api';
 
-function Geopgraphy() {
+function Geography() {
   const theme = useTheme();
   const { data } = useGetUserLocationsQuery();
 
@@ -98,4 +98,4 @@ function Geopgraphy() {
   );
 }
 
-export default Geopgraphy;
+export default Geography;

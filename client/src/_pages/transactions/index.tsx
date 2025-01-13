@@ -36,11 +36,11 @@ function Transactions() {
       headerName: 'User ID',
       flex: 1,
     },
-    {
-      field: 'createdAt',
-      headerName: 'Created At',
-      flex: 1,
-    },
+    // {
+    //   field: 'createdAt',
+    //   headerName: 'Created At',
+    //   flex: 1,
+    // },
     {
       field: 'products',
       headerName: '# of Products',
@@ -88,31 +88,6 @@ function Transactions() {
           },
         }}
       >
-        {/* <DataGrid
-          loading={isLoading || !data}
-          getRowId={(row) => row._id}
-          rows={data?.data || []}
-          columns={columns}
-          rowCount={data?.meta.total || 0}
-          paginationMode='server'
-          sortingMode='server'
-          paginationModel={{ page, pageSize }}
-          onPaginationModelChange={(model) => {
-            setPage(model.page);
-            setPageSize(model.pageSize);
-          }}
-          onSortModelChange={(newSortModel) => {
-            const sortModel = newSortModel[0] || {};
-            setSort({
-              field: sortModel.field || '',
-              sort: sortModel.sort || '',
-            });
-          }}
-          slots={{ toolbar: CustomToolbar }}
-          componentsProps={{
-            toolbar: { searchInput, setSearchInput, setSearch },
-          }}
-        /> */}
         <DataGrid
           loading={isLoading || !data}
           getRowId={(row) => row._id}

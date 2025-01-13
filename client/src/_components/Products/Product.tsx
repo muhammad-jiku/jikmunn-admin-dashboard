@@ -66,10 +66,10 @@ function Product({ data }: ProductProps) {
           <Typography>id: {data?._id}</Typography>
           <Typography>Supply Left: {data?.supply}</Typography>
           <Typography>
-            Yearly Sales This Year: {data?.stat.yearlySalesTotal}
+            Yearly Sales This Year: {data?.stat[0]?.yearlySalesTotal}
           </Typography>
           <Typography>
-            Yearly Units Sold This Year: {data?.stat.yearlyTotalSoldUnits}
+            Yearly Units Sold This Year: {data?.stat[0]?.yearlyTotalSoldUnits}
           </Typography>
         </CardContent>
       </Collapse>

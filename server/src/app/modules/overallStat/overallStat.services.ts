@@ -2,16 +2,18 @@ import { IOverallStat } from './overallStat.interfaces';
 import { OverallStat } from './overallStat.model';
 
 const getSales = async (): Promise<IOverallStat[] | null> => {
-  // Fetch overall stats
-  const overallStats = await OverallStat.find().lean(); // Returns plain JavaScript objects
+  const overallStats = await OverallStat.find().lean();
 
-  // Transform salesByCategory back into a Map for each document
+  // Convert salesByCategory to Map<string, number>
   const formattedStats = overallStats.map((stat) => ({
     ...stat,
-    salesByCategory: new Map(Object.entries(stat.salesByCategory)),
+    salesByCategory:
+      stat.salesByCategory && Object.keys(stat.salesByCategory).length > 0
+        ? stat.salesByCategory
+        : { defaultCategory: 0 }, // Provide a meaningful default
   }));
 
-  return formattedStats;
+  return formattedStats as IOverallStat[];
 };
 
 export const OverallStatServices = {

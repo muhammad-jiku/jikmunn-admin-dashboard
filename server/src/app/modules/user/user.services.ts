@@ -13,7 +13,14 @@ import {
 import { User } from './user.model';
 
 const getUser = async (id: string): Promise<IUser | null> => {
-  const result = await User.findOne({ id });
+  console.log('id', id);
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    console.error('Invalid ObjectId format:', id);
+    return null;
+  }
+
+  const result = await User.findOne({});
+  console.log('result', result);
   if (!result) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Sorry, no user found!');
   }
@@ -25,7 +32,8 @@ const getUserPerformance = async (
   id: string
 ): Promise<IUserPerformance | null> => {
   const userWithStats = await User.aggregate([
-    { $match: { _id: new mongoose.Types.ObjectId(id) } },
+    // { $match: { _id: new mongoose.Types.ObjectId(id) } },
+    { $match: { _id: id } },
     {
       $lookup: {
         from: 'affiliatestats',

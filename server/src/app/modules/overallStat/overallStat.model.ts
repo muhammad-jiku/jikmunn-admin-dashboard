@@ -62,6 +62,11 @@ const overallStatSchema = new Schema<IOverallStat, IOverallStatModel>(
     timestamps: true,
     toJSON: {
       virtuals: true,
+      transform: (_, ret) => {
+        // Ensure `salesByCategory` is converted to a plain object
+        ret.salesByCategory = Object.fromEntries(ret.salesByCategory || []);
+        return ret;
+      },
     },
   }
 );

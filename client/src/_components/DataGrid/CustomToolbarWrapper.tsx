@@ -2,7 +2,7 @@ import { GridToolbarContainer } from '@mui/x-data-grid';
 import CustomToolbar, { CustomToolbarProps } from './CustomToolbar';
 
 type CustomToolbarWrapperProps = CustomToolbarProps & {
-  // Add props from GridToolbarProps if needed
+  // Additional props if required
 };
 
 const CustomToolbarWrapper = ({
@@ -12,7 +12,15 @@ const CustomToolbarWrapper = ({
   ...props
 }: CustomToolbarWrapperProps) => {
   return (
-    <GridToolbarContainer {...props}>
+    <GridToolbarContainer
+      {...props}
+      style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        width: '100%',
+      }}
+    >
       <CustomToolbar
         searchInput={searchInput}
         setSearchInput={setSearchInput}

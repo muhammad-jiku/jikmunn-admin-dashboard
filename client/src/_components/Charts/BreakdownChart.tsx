@@ -2,8 +2,7 @@ import { Box, Typography, useTheme } from '@mui/material';
 import { ResponsivePie } from '@nivo/pie';
 import { useGetSalesQuery } from '../../_store/api';
 
-function BreakdownChart() {
-  const isDashboard = false;
+function BreakdownChart({ isDashboard = false }) {
   const theme = useTheme();
   const { data, isLoading } = useGetSalesQuery();
 
@@ -99,7 +98,7 @@ function BreakdownChart() {
             justify: false,
             translateX: isDashboard ? 20 : 0,
             translateY: isDashboard ? 50 : 56,
-            itemsSpacing: 0,
+            itemsSpacing: 10,
             itemWidth: 85,
             itemHeight: 18,
             itemTextColor: '#999',

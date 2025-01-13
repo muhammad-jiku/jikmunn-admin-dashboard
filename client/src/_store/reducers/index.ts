@@ -6,8 +6,9 @@ interface IGlobalState {
 }
 
 const initialState: IGlobalState = {
-  mode: 'light',
+  mode: 'dark',
   userId: '63701cc1f03239c72c00017f',
+  // userId: '63701cc1f03239c72c000181',
 };
 
 export const globalSlice = createSlice({

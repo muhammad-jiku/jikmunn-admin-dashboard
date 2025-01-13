@@ -1,12 +1,10 @@
 import { Search } from '@mui/icons-material';
-import { IconButton, InputAdornment, TextField } from '@mui/material';
+import { Box, IconButton, InputAdornment, TextField } from '@mui/material';
 import {
   GridToolbarColumnsButton,
-  GridToolbarContainer,
   GridToolbarDensitySelector,
   GridToolbarExport,
 } from '@mui/x-data-grid';
-import { FlexBetween } from '../FlexBetween';
 
 export type CustomToolbarProps = {
   searchInput: string;
@@ -20,36 +18,42 @@ function CustomToolbar({
   setSearch,
 }: CustomToolbarProps) {
   return (
-    <GridToolbarContainer>
-      <FlexBetween width='100%'>
-        <FlexBetween>
-          <GridToolbarColumnsButton />
-          <GridToolbarDensitySelector />
-          <GridToolbarExport />
-        </FlexBetween>
-        <TextField
-          label='Search...'
-          sx={{ mb: '0.5rem', width: '15rem' }}
-          onChange={(e) => setSearchInput(e.target.value)}
-          value={searchInput}
-          variant='standard'
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position='end'>
-                <IconButton
-                  onClick={() => {
-                    setSearch(searchInput);
-                    setSearchInput('');
-                  }}
-                >
-                  <Search />
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
-        />
-      </FlexBetween>
-    </GridToolbarContainer>
+    <Box
+      display='flex'
+      justifyContent='space-between'
+      alignItems='center'
+      width='100%'
+    >
+      {/* Left Side: Toolbar buttons */}
+      <Box display='flex' gap='1rem' alignItems='center'>
+        <GridToolbarColumnsButton />
+        <GridToolbarDensitySelector />
+        <GridToolbarExport />
+      </Box>
+
+      {/* Right Side: Search bar */}
+      <TextField
+        label='Search...'
+        sx={{ mb: '0.5rem', width: '15rem' }}
+        onChange={(e) => setSearchInput(e.target.value)}
+        value={searchInput}
+        variant='standard'
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position='end'>
+              <IconButton
+                onClick={() => {
+                  setSearch(searchInput);
+                  setSearchInput('');
+                }}
+              >
+                <Search />
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
+      />
+    </Box>
   );
 }
 

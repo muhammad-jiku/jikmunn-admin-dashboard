@@ -191,5 +191,5 @@ export interface IDashboardResponse {
   meta: {
     total: number;
   };
-  data: IDashboard[];
+  data: IDashboard;
 }

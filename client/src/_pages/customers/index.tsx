@@ -7,7 +7,6 @@ import { useGetCustomersQuery } from '../../_store/api';
 function Customers() {
   const theme = useTheme();
   const { data, isLoading } = useGetCustomersQuery();
-  //   console.log('data', data);
 
   const columns: GridColDef<IUser>[] = [
     {

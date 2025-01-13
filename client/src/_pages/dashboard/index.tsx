@@ -36,11 +36,11 @@ function Dashboard() {
       headerName: 'User ID',
       flex: 1,
     },
-    {
-      field: 'createdAt',
-      headerName: 'CreatedAt',
-      flex: 1,
-    },
+    // {
+    //   field: 'createdAt',
+    //   headerName: 'CreatedAt',
+    //   flex: 1,
+    // },
     {
       field: 'products',
       headerName: '# of Products',
@@ -94,7 +94,7 @@ function Dashboard() {
         {/* ROW 1 */}
         <StatBox
           title='Total Customers'
-          value={data && data?.data[0]?.totalCustomers}
+          value={data && data?.data?.totalCustomers}
           increase='+14%'
           description='Since last month'
           icon={
@@ -105,7 +105,7 @@ function Dashboard() {
         />
         <StatBox
           title='Sales Today'
-          value={data && data?.data[0]?.todayStats?.totalSales}
+          value={data && data?.data?.todayStats?.totalSales}
           increase='+21%'
           description='Since last month'
           icon={
@@ -114,20 +114,9 @@ function Dashboard() {
             />
           }
         />
-        <Box
-          sx={{
-            gridColumn: 'span 8',
-            gridRow: 'span 2',
-            backgroundColor: theme.palette.background.alt,
-            p: '1rem',
-            borderRadius: '0.55rem',
-          }}
-        >
-          <OverviewChart isDashboard={true} view='sales' />
-        </Box>
         <StatBox
           title='Monthly Sales'
-          value={data && data?.data[0]?.thisMonthStats?.totalSales}
+          value={data && data?.data?.thisMonthStats?.totalSales}
           increase='+5%'
           description='Since last month'
           icon={
@@ -138,7 +127,7 @@ function Dashboard() {
         />
         <StatBox
           title='Yearly Sales'
-          value={data && data?.data[0]?.yearlySalesTotal}
+          value={data && data?.data?.yearlySalesTotal}
           increase='+43%'
           description='Since last month'
           icon={
@@ -150,12 +139,24 @@ function Dashboard() {
 
         {/* ROW 2 */}
         <Box
+          sx={{
+            gridColumn: 'span 12',
+            gridRow: 'span 2',
+            backgroundColor: theme.palette.background.alt,
+            p: '1rem',
+            borderRadius: '0.55rem',
+          }}
+        >
+          <OverviewChart isDashboard={true} view='sales' />
+        </Box>
+        {/* ROW 3 */}
+        <Box
           gridColumn='span 8'
           gridRow='span 3'
           sx={{
             '& .MuiDataGrid-root': {
               border: 'none',
-              borderRadius: '5rem',
+              borderRadius: '1rem',
             },
             '& .MuiDataGrid-cell': {
               borderBottom: 'none',
@@ -181,7 +182,7 @@ function Dashboard() {
           <DataGrid
             loading={isLoading || !data}
             getRowId={(row) => row._id}
-            rows={(data && data?.data[0]?.transactions) || []}
+            rows={data?.data?.transactions || []}
             columns={columns}
           />
         </Box>
