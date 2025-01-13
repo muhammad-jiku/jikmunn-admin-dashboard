@@ -8,7 +8,7 @@ const express_1 = __importDefault(require("express"));
 const user_controllers_1 = require("./user.controllers");
 const router = express_1.default.Router();
 router.route('/customers').get(user_controllers_1.UserControllers.getCustomers);
-router.route('/admins').get(user_controllers_1.UserControllers.getCustomers);
+router.route('/admins').get(user_controllers_1.UserControllers.getAdmins);
 router.route('/dashboard').get(user_controllers_1.UserControllers.getDashboardStats);
 router.route('/location').get(user_controllers_1.UserControllers.getGeography);
 router.route('/:email').get(user_controllers_1.UserControllers.getUser);
