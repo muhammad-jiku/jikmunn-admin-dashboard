@@ -13,9 +13,9 @@ import { UserServices } from './user.services';
 const getUser = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const { userId } = req.params;
+      const { email } = req.params;
 
-      const result = await UserServices.getUser(userId);
+      const result = await UserServices.getUser(email);
 
       sendResponse<IUser>(res, {
         statusCode: httpStatus.OK,
@@ -32,9 +32,9 @@ const getUser = catchAsync(
 const getUserPerformance = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const { userId } = req.params;
+      const { email } = req.params;
 
-      const result = await UserServices.getUserPerformance(userId);
+      const result = await UserServices.getUserPerformance(email);
 
       sendResponse<IUserPerformance>(res, {
         statusCode: httpStatus.OK,

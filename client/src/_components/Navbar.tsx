@@ -26,7 +26,7 @@ import { setMode } from '../_store/reducers';
 import { FlexBetween } from './FlexBetween';
 
 type NavbarProps = {
-  data: IUser;
+  data: IUser | undefined;
   isSidebarOpen: boolean;
   setIsSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };

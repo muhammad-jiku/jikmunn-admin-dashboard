@@ -1,6 +1,6 @@
 export interface IGlobalState {
   global: {
-    userId: string;
+    email: string;
   };
 }
 
@@ -26,7 +26,7 @@ export interface IUserResponse {
   meta: {
     total: number;
   };
-  data: IUser[];
+  data: IUser;
 }
 
 // customers
@@ -110,11 +110,11 @@ export interface IGeographyResponse {
 }
 
 // sales
-// interface IMonthlyData {
-//   month: string;
-//   totalSales: number;
-//   totalUnits: number;
-// }
+export interface IMonthlyData {
+  month: string;
+  totalSales: number;
+  totalUnits: number;
+}
 
 export interface IDailyData {
   date: string;
@@ -156,7 +156,7 @@ export interface IUserPerformanceResponse {
   meta: {
     total: number;
   };
-  data: IUserPerformance[];
+  data: IUserPerformance;
 }
 
 // dashbaord

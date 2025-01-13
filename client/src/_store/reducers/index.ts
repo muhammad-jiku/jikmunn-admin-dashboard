@@ -1,14 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface IGlobalState {
+interface IGlobalReducerState {
   mode: 'light' | 'dark'; // Restrict type to "light" or "dark"
-  userId: string;
+  email: string;
 }
 
-const initialState: IGlobalState = {
+const initialState: IGlobalReducerState = {
   mode: 'dark',
-  userId: '63701cc1f03239c72c00017f',
-  // userId: '63701cc1f03239c72c000181',
+  email: 'rradolfh@webeden.co.uk',
 };
 
 export const globalSlice = createSlice({

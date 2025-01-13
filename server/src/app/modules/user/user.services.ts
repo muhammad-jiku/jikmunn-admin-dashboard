@@ -1,6 +1,5 @@
 import getCountryIso3 from 'country-iso-2-to-3';
 import httpStatus from 'http-status';
-import mongoose from 'mongoose';
 import ApiError from '../../../errors/ApiError';
 import { OverallStat } from '../overallStat/overallStat.model';
 import { Transaction } from '../transaction/transaction.model';
@@ -12,15 +11,9 @@ import {
 } from './user.interfaces';
 import { User } from './user.model';
 
-const getUser = async (id: string): Promise<IUser | null> => {
-  console.log('id', id);
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    console.error('Invalid ObjectId format:', id);
-    return null;
-  }
+const getUser = async (email: string): Promise<IUser | null> => {
+  const result = await User.findOne({ email });
 
-  const result = await User.findOne({});
-  console.log('result', result);
   if (!result) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Sorry, no user found!');
   }
@@ -29,11 +22,10 @@ const getUser = async (id: string): Promise<IUser | null> => {
 };
 
 const getUserPerformance = async (
-  id: string
+  email: string
 ): Promise<IUserPerformance | null> => {
   const userWithStats = await User.aggregate([
-    // { $match: { _id: new mongoose.Types.ObjectId(id) } },
-    { $match: { _id: id } },
+    { $match: { email } },
     {
       $lookup: {
         from: 'affiliatestats',
@@ -43,6 +35,14 @@ const getUserPerformance = async (
       },
     },
     { $unwind: '$affiliateStats' },
+    {
+      $lookup: {
+        from: 'transactions',
+        localField: 'affiliateStats.affiliateSales',
+        foreignField: '_id',
+        as: 'sales',
+      },
+    },
   ]);
 
   if (!userWithStats || userWithStats.length === 0) {
@@ -52,21 +52,9 @@ const getUserPerformance = async (
     );
   }
 
-  // Fetch sales transactions
-  const saleTransactions = await Promise.all(
-    userWithStats[0].affiliateStats.affiliateSales.map((saleId: string) =>
-      Transaction.findById(saleId)
-    )
-  );
-
-  // Filter valid transactions
-  const filteredSaleTransactions = saleTransactions.filter(
-    (transaction) => transaction !== null
-  );
-
   return {
     user: userWithStats[0],
-    sales: filteredSaleTransactions,
+    sales: userWithStats[0].sales,
   };
 };
 

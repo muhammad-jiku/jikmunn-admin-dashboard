@@ -5,7 +5,6 @@ import {
   IProductResponse,
   ISaleResponse,
   ITransactionResponse,
-  IUser,
   IUserPerformanceResponse,
   IUserResponse,
 } from '../../_interfaces';
@@ -28,13 +27,13 @@ export const apiSlice = createApi({
   ], // Define tag types used for caching
   endpoints: (builder) => ({
     // Get user
-    getUser: builder.query<IUser, string>({
-      query: (userId) => `/api/v1/users/${userId}`,
+    getUser: builder.query<IUserResponse, string>({
+      query: (email) => `/api/v1/users/${email}`,
       providesTags: ['user'], // Cache invalidation tag
     }),
     // Get user performance
     getUserPerformance: builder.query<IUserPerformanceResponse, string>({
-      query: (userId) => `/api/v1/users/${userId}/performance`,
+      query: (email) => `/api/v1/users/${email}/performance`,
       providesTags: ['user_performance'], // Cache invalidation tag
     }),
     // Get dashboard

@@ -33,7 +33,7 @@ import { IUser } from '../_interfaces';
 import { FlexBetween } from './FlexBetween';
 
 type SidebarProps = {
-  data: IUser;
+  data: IUser | undefined;
   drawerWidth: string;
   isSidebarOpen: boolean;
   setIsSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;

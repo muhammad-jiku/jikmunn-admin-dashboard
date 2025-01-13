@@ -10,8 +10,8 @@ import { useGetUserQuery } from '../../_store/api';
 function Layout() {
   const isNonMobile = useMediaQuery('(min-width: 600px)');
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  const userId = useSelector((state: IGlobalState) => state.global.userId);
-  const { data } = useGetUserQuery(userId);
+  const email = useSelector((state: IGlobalState) => state.global.email);
+  const { data } = useGetUserQuery(email);
   const user = data?.data;
 
   return (

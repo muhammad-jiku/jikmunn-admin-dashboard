@@ -9,8 +9,8 @@ import { useGetUserPerformanceQuery } from '../../_store/api';
 
 function Performance() {
   const theme = useTheme();
-  const userId = useSelector((state: RootState) => state.global.userId);
-  const { data, isLoading } = useGetUserPerformanceQuery(userId);
+  const email = useSelector((state: RootState) => state.global.email);
+  const { data, isLoading } = useGetUserPerformanceQuery(email);
 
   const columns = [
     {
@@ -23,11 +23,11 @@ function Performance() {
       headerName: 'User ID',
       flex: 1,
     },
-    {
-      field: 'createdAt',
-      headerName: 'CreatedAt',
-      flex: 1,
-    },
+    // {
+    //   field: 'createdAt',
+    //   headerName: 'CreatedAt',
+    //   flex: 1,
+    // },
     {
       field: 'products',
       headerName: '# of Products',
@@ -82,7 +82,7 @@ function Performance() {
         <DataGrid
           loading={isLoading || !data}
           getRowId={(row) => row._id}
-          rows={(data && data?.data[0]?.sales) || []}
+          rows={data?.data?.sales || []}
           columns={columns}
           slots={{
             columnMenu: CustomColumnMenu,
