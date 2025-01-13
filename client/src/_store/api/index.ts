@@ -7,6 +7,7 @@ import {
   ITransactionResponse,
   IUserPerformanceResponse,
   IUserResponse,
+  IUsersResponse,
 } from '../../_interfaces';
 
 const baseURI = import.meta.env.VITE_BASE_URI;
@@ -47,12 +48,12 @@ export const apiSlice = createApi({
       providesTags: ['location'], // Cache invalidation tag
     }),
     // Get customers
-    getCustomers: builder.query<IUserResponse, void>({
+    getCustomers: builder.query<IUsersResponse, void>({
       query: () => `/api/v1/users/customers`,
       providesTags: ['customers'], // Cache invalidation tag
     }),
     // Get admins
-    getAdmins: builder.query<IUserResponse, void>({
+    getAdmins: builder.query<IUsersResponse, void>({
       query: () => `/api/v1/users/admins`,
       providesTags: ['admins'], // Cache invalidation tag
     }),

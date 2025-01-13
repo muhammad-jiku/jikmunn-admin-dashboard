@@ -29,6 +29,16 @@ export interface IUserResponse {
   data: IUser;
 }
 
+export interface IUsersResponse {
+  statusCode: number;
+  success: boolean;
+  message: string;
+  meta: {
+    total: number;
+  };
+  data: IUser[];
+}
+
 // customers
 
 // products
@@ -59,7 +69,7 @@ export interface IProduct {
         totalUnits: number;
       }
     ];
-  };
+  }[];
 }
 
 export interface IProductResponse {
